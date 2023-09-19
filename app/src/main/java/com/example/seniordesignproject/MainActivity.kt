@@ -72,7 +72,10 @@ fun Banner(){
             )
     }
 
-    Column {
+    Column (
+        Modifier
+            .width((LocalConfiguration.current.screenWidthDp.dp/6)*4)
+    ){
         Text(
             text = "APP NAME HERE",
             //add modifications to banner text here
