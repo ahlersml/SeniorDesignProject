@@ -8,4 +8,8 @@ plugins {
 
     //Crashlytics
     id("com.google.firebase.crashlytics") version "2.9.9" apply false
+
+    //Performance Monitoring
+    id("com.google.firebase.firebase-perf") version "1.4.2" apply false
+
 }

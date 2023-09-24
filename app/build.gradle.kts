@@ -7,6 +7,10 @@ plugins {
 
     //Crashlytics plugin
     id("com.google.firebase.crashlytics")
+
+    //Performance Monitoring
+    id("com.google.firebase.firebase-perf")
+
 }
 
 android {
@@ -78,7 +82,14 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
 
+    //depencies needed for Google Play App Check
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    implementation("com.google.firebase:firebase-appcheck-ktx")
+
     //dependencies needed for Crashlytics
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
+
+    //dependencies needed for performance monitoring
+    implementation("com.google.firebase:firebase-perf-ktx")
 }
