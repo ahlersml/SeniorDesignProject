@@ -1,7 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //Google Services plugin
     id("com.google.gms.google-services")
+
+    //Crashlytics plugin
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -71,5 +76,9 @@ dependencies {
 
     //dependencies needed for Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
+    //dependencies needed for Crashlytics
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
 }
