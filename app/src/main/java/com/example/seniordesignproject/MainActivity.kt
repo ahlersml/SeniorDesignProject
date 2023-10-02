@@ -32,6 +32,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seniordesignproject.ui.theme.SeniorDesignProjectTheme
+import com.google.firebase.appcheck.ktx.appCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
 
 class MainActivity : ComponentActivity() {
 
@@ -40,6 +44,13 @@ class MainActivity : ComponentActivity() {
 
         viewModel.selectedTab.value = "Rooms"
         super.onCreate(savedInstanceState)
+
+        //Firebase initialization
+        Firebase.initialize(context = this)
+        Firebase.appCheck.installAppCheckProviderFactory(
+            PlayIntegrityAppCheckProviderFactory.getInstance(),
+        )
+
         setContent {
             SeniorDesignProjectTheme {
                 // A surface container using the 'background' color from the theme
