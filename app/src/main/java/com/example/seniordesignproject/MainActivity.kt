@@ -1,6 +1,7 @@
 package com.example.seniordesignproject
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -32,12 +33,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seniordesignproject.ui.theme.SeniorDesignProjectTheme
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        fireBasePull()
+        fireBasePush()
         viewModel.selectedTab.value = "Rooms"
         super.onCreate(savedInstanceState)
         setContent {
@@ -51,6 +54,37 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+fun fireBasePull(){
+    val database = FirebaseFirestore.getInstance()
+    database.collection("user").get()
+        .addOnSuccessListener { documents ->
+            for (document in documents) {
+                // Print each document's data to the console
+                Log.d("Firestore", "Document ID: ${document.id}")
+                Log.d("Firestore", "Data: ${document.data}")
+            }
+
+    }.addOnFailureListener { exception ->
+        Log.e("Firestore", "Error fetching data: $exception")
+    }
+
+}
+data class User(
+    val firstName: String,
+    val lastName: String
+)
+val newUser = User("John", "Doe")
+fun fireBasePush(){
+    val database = FirebaseFirestore.getInstance()
+    database.collection("user").add(newUser)
+        .addOnSuccessListener {documentReference ->
+        Log.d("Firestore", "User added successfully with ID: ${documentReference.id}")
+        }
+        .addOnFailureListener { exception ->
+            Log.e("Firestore", "Error adding user: $exception")
+        }
+
 }
 
 @Composable
